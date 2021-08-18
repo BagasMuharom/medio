@@ -23,7 +23,7 @@
                     </p>
                 </div>
 
-                <btn-primary width="full">
+                <btn-primary width="full" @click="toSoal('satuan')">
                     Mulai
                 </btn-primary>
             </div>
@@ -43,7 +43,7 @@
                     </p>
                 </div>
 
-                <btn-primary width="full">
+                <btn-primary width="full" @click="toSoal('puluhan')">
                     Mulai
                 </btn-primary>
             </div>
@@ -63,7 +63,7 @@
                     </p>
                 </div>
 
-                <btn-primary width="full">
+                <btn-primary width="full" @click="toSoal('ratusan')">
                     Mulai
                 </btn-primary>
             </div>
@@ -83,7 +83,7 @@
                     </p>
                 </div>
 
-                <btn-primary width="full">
+                <btn-primary width="full" @click="toSoal('ribuan')">
                     Mulai
                 </btn-primary>
             </div>
@@ -94,7 +94,40 @@
 <script>
 export default {
     data() {
+        return {
+            config: {
+                satuan: {
+                    jumlah_soal: 15,
+                    number_min: 1,
+                    number_max: 9
+                },
+                puluhan: {
+                    jumlah_soal: 15,
+                    number_min: 2,
+                    number_max: 50
+                },
+                ratusan: {
+                    jumlah_soal: 15,
+                    number_min: 20,
+                    number_max: 500
+                },
+                ribuan: {
+                    jumlah_soal: 15,
+                    number_min: 100,
+                    number_max: 5000
+                },
+            }
+        }
+    },
 
+    methods: {
+        toSoal(config) {
+            localStorage.setItem('config', JSON.stringify(this.config[config]));
+
+            this.$router.push({
+                name: 'penjumlahan.soal'
+            });
+        }
     }
 }
 </script>
