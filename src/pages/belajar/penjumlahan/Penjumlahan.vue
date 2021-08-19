@@ -11,7 +11,7 @@
             hidden: !answered
         }]">
             <div class="relative w-full h-full">
-                <div :class="['absolute w-full h-full flex justify-center items-center', {
+                <div :class="['absolute w-full h-full flex justify-center items-center animate__faster', {
                     animate__animated: answered,
                     animate__zoomIn: answered
                 }]">
@@ -19,7 +19,7 @@
                     <div class="rounded-full bg-red-200 w-80 h-80" v-if="!true_answer"></div>
                 </div>
                 
-                <div :class="['absolute w-full h-full flex justify-center items-center', {
+                <div :class="['absolute w-full h-full flex justify-center items-center animate__faster', {
                     animate__animated: answered,
                     animate__zoomIn: answered
                 }]">
@@ -27,7 +27,7 @@
                     <div class="rounded-full absolute bg-red-400 w-48 h-48" v-if="!true_answer"></div>
                 </div>
                 
-                <div :class="['absolute w-full h-full flex justify-center items-center', {
+                <div :class="['absolute w-full h-full flex justify-center items-center animate__faster', {
                     animate__animated: answered,
                     animate__zoomIn: answered
                 }]">
@@ -135,7 +135,7 @@ export default {
                 that.answered = false;
                 that.true_answer = null;
                 that.index_soal++;
-            }, 1250);
+            }, 750);
 
             this.true_answer = (option == this.daftar_soal[this.index_soal].answer);
         }
