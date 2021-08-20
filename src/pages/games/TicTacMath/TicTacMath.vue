@@ -137,6 +137,7 @@
                     </div>
                     <div
                         @click="chooseOperator('x')"
+                        v-if="tipe == 'lanjutan'"
                         :class="[
               'border-4 font-bold rounded-md flex-grow text-2xl m-1 text-center py-2',
               {
@@ -239,12 +240,15 @@ export default {
             choosed_operator: null,
             hasil_operasi: null,
             pemenang: null,
+            tipe: null
         };
     },
 
     mounted() {
-        this.generateNumberBoard();
         this.index = this.generateRandomIndex();
+        this.tipe = this.$route.params.tipe;
+
+        this.generateNumberBoard();
     },
 
     methods: {
@@ -282,28 +286,44 @@ export default {
                 // atas
                 if (row > 0) {
                     if (this.board[row - 1][col] < 10 && num < 10) {
-                        this.board[row - 1][col] *= num;
+                        if (this.tipe == 'lanjutan') {
+                            this.board[row - 1][col] *= num;
+                        } else {
+                            this.board[row - 1][col] += num;
+                        }
                     }
                 }
 
                 // bawah
                 if (row < this.boardSize - 1) {
                     if (this.board[row + 1][col] < 10 && num < 10) {
-                        this.board[row + 1][col] *= num;
+                        if (this.tipe == 'lanjutan') {
+                            this.board[row + 1][col] *= num;
+                        } else {
+                            this.board[row + 1][col] += num;
+                        }
                     }
                 }
 
                 // kiri
                 if (col > 0) {
                     if (this.board[row][col - 1] < 10 && num < 10) {
-                        this.board[row][col - 1] *= num;
+                        if (this.tipe == 'lanjutan') {
+                            this.board[row][col - 1] *= num;
+                        } else {
+                            this.board[row][col - 1] += num;
+                        }
                     }
                 }
 
                 // bawah
                 if (col < this.boardSize - 1) {
                     if (this.board[row][col + 1] < 10 && num < 10) {
-                        this.board[row][col + 1] *= num;
+                        if (this.tipe == 'lanjutan') {
+                            this.board[row][col + 1] *= num;
+                        } else {
+                            this.board[row][col + 1] += num;
+                        }
                     }
                 }
             }

@@ -45,19 +45,11 @@
                     <div class="bg-black h-5 rounded-full" :style="{width: index_soal / jumlah_soal * 100 + '%'}"></div>
                 </div>
 
-                <div class="px-4 py-4 border-black border-2 w-full rounded-md flex flex-col items-center mt-3">
-                    <div class="text-9xl font-bold font-quicksand">
+                <soal-pilihan-ganda :options="daftar_soal[index_soal].options_list" v-on:answer="answer">
+                    <template v-slot:question>
                         {{ daftar_soal[index_soal].a }} + {{ daftar_soal[index_soal].b }}
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap mt-3">
-                    <div class="px-4 py-4 w-1/2 mb-3" v-for="option in daftar_soal[index_soal].options_list" :key="option">
-                        <div class="p-4 border-black border-2 w-full text-center text-9xl rounded-md hover:border-white hover:text-white hover:bg-black cursor-pointer" @click="answer(option)">
-                            {{ option }}
-                        </div>
-                    </div>
-                </div>
+                    </template>
+                </soal-pilihan-ganda>
             </div>
         </div>
 
@@ -107,7 +99,9 @@
 </template>
 
 <script>
+import SoalPilihanGanda from '../../../components/app/layouts/soal/SoalPilihanGanda.vue';
 export default {
+  components: { SoalPilihanGanda },
     data() {
         return {
             jumlah_soal: null,

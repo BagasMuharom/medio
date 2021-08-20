@@ -7,12 +7,20 @@
 
 		<div class="h-px bg-gray-300 w-full"></div>
 
-        <div class="flex justify-center mt-4">
+        <div class="flex flex-col items-center mt-4">
             <router-link :to="{name: 'penjumlahan.navigation'}">
                 <btn-primary size="lg">
                     <fa-icon icon="infinity" size="lg"/> <span class="border-l-2 border-black h-full group-hover:border-white mx-2"></span> Penjumlahan
                 </btn-primary>
             </router-link>
+
+            <div class="mt-3">
+                <router-link :to="{name: 'penjumlahan.navigation'}">
+                    <btn-primary size="lg">
+                        <fa-icon icon="infinity" size="lg"/> <span class="border-l-2 border-black h-full group-hover:border-white mx-2"></span> Perkalian
+                    </btn-primary>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>

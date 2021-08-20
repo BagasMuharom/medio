@@ -3,7 +3,8 @@ import ChooseGame from '../pages/ChooseGame.vue';
 import Belajar from '../pages/Belajar.vue';
 import PenjumlahanNavigation from '../pages/belajar/penjumlahan/PenjumlahanNavigation.vue';
 import Penjumlahan from '../pages/belajar/penjumlahan/Penjumlahan.vue';
-import TicTacMath from '../pages/games/TicTacMath.vue';
+import TicTacMath from '../pages/games/TicTacMath/TicTacMath.vue';
+import TicTacMathNavigation from '../pages/games/TicTacMath/TicTacMathNavigation.vue';
 
 let routes = [
     {
@@ -32,7 +33,12 @@ let routes = [
         component: Penjumlahan
     },
     {
-        path: '/tictacmath',
+        path: '/tictacmath-navigation',
+        name: 'tictacmath.navigation',
+        component: TicTacMathNavigation
+    },
+    {
+        path: '/tictacmath/:tipe',
         name: 'tictacmath',
         component: TicTacMath
     }
