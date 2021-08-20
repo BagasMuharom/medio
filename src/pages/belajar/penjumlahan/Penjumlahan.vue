@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen flex-col">
+    <div class="flex h-screen flex-col font-quicksand">
         <!-- Header -->
         <div class="flex p-3">
             <h2 class="text-xl font-quicksand">Penjumlahan</h2>
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap p-8 justify-center" v-if="daftar_soal.length > 0">
+        <div class="flex flex-wrap p-8 justify-center" v-if="daftar_soal.length > 0 && index_soal < jumlah_soal">
             <div class="w-10/12">
                 <p>Soal {{ index_soal + 1 }} dari {{ jumlah_soal }}</p>
 
@@ -60,6 +60,49 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex flex-wrap p-8 justify-center" v-if="index_soal == jumlah_soal">
+            <div class="w-10/12">
+                <p class="text-2xl">
+                    Jawaban Benar: {{ total_true_answer }} dari {{ jumlah_soal }} soal
+                </p>
+
+                <h3 class="text-3xl font-bold">Daftar Jawaban Salah</h3>
+
+                <div class="flex w-full text-3xl">
+                    <div class="w-1/3">Soal</div>
+                    <div class="w-1/3">Jawaban Benar</div>
+                    <div class="w-1/3">Jawaban yang Dipilih</div>
+                </div>
+
+                <div v-for="(soal, index) in daftar_soal" :key="index">
+                    <div class="flex w-full text-3xl border-2 rounded-md mt-3 border-red-600 bg-red-200 text-red-900" v-if="soal.answer != soal.answered">
+                        <div class="w-1/3">
+                            <div class="p-3">
+                                {{ soal.a }} + {{ soal.b }}
+                            </div>
+                        </div>
+                        <div class="w-1/3">
+                            <div class="p-3">
+                                {{ soal.answer }}
+                            </div>
+                        </div>
+                        <div class="w-1/3">
+                            <div class="p-3">
+                                {{ soal.answered }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <router-link :to="{name: 'penjumlahan.navigation'}">
+                    <button class="font-quicksand font-semibold border-2 border-black rounded-full py-2 px-4 hover:bg-black hover:text-white transition duration-100 mt-4">
+                        Belajar lagi
+                    </button>
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -67,13 +110,14 @@
 export default {
     data() {
         return {
-            jumlah_soal: 10,
+            jumlah_soal: null,
             number_min: 1,
             number_max: 9,
             daftar_soal: [],
             index_soal: 0,
             answered: false,
-            true_answer: null
+            true_answer: null,
+            total_true_answer: 0
         }
     },
 
@@ -131,6 +175,8 @@ export default {
 
             this.answered = true;
 
+            this.daftar_soal[this.index_soal].answered = option;
+
             setTimeout(() => {
                 that.answered = false;
                 that.true_answer = null;
@@ -138,6 +184,16 @@ export default {
             }, 750);
 
             this.true_answer = (option == this.daftar_soal[this.index_soal].answer);
+
+            if (this.true_answer) {
+                this.total_true_answer++;
+            }
+        }
+    },
+
+    computed: {
+        nilai() {
+            
         }
     }
 }
